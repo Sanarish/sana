@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,  initial-scale=1.0">
+<style type="text/css">
+body,html
+{
+margin:0;
+padding:0;
+
+}
+header
+{
+background-color:dimgrey;
+}
+nav
+{
+width:100%;
+height:65px;
+margin:auto;
+position:fixed;
+background-color:dimgrey;
+font-size:20px;
+}
+ul.left
+{
+list-style:none;
+display:inline;
+float:left;
+}
+ul.right
+{
+list-style:none;
+display:inline;
+float:right;
+}
+li
+{
+display:inline;
+}
+h1
+{
+text-align:left;
+}
+a
+{
+display:inline-block;
+padding:15px;
+}
+#a1:hover
+{
+color:yellow;
+}
+#h2
+{
+font-family:Lucida Handwriting,cursive;
+font-size:25px;
+color:brown;
+text-align:left;
+background-color:lightgrey;
+}
+.container
+{
+width:500px;
+margin:auto;
+border:3px solid grey;
+border-radius: 5px;
+background-color: black;
+padding: 5px;
+}
+#h3
+{
+text-align:center;
+color:pink;
+font-family:Papyrus, fantasy;
+font-size:30px;
+}
+input
+{
+width: 100%;
+padding: 6px;
+color:black;
+background-color:lightgrey;
+border: 2px solid darkgrey;
+border-radius: 4px;
+}
+label {
+padding: 12px 12px 12px 0;
+display: inline-block;
+color:white;
+}
+input[type=submit]
+{
+margin:auto;
+background-color: darkgreen;
+color: white;
+padding: 12px 20px;
+border: none;
+cursor: pointer;
+font-size: 16px;
+height:50px;
+width:100px;
+}
+input[type=submit]:hover
+{
+opacity:0.9;
+}
+footer
+{
+font-family:Apple Chancery,cursive;
+font-size:18px;
+background-color:grey;
+color:black;
+padding-bottom:15px;
+}
+@media only screen and (max-width:768px)
+{
+[class*="col-"]{
+width:100%;
+}
+}
+</style>
+</head>
+
+<body background="blck.jpg">
+<header>
+<nav>
+<ul class="left">
+<li><font face="Lucida Handwriting,cursive" color="white" size="5" id="h1"><b>The Secret Kitchen</b></font></li>
+</ul>
+<ul class="right">
+<li><a href="home.html"><font face="arial" color="white" id="a1"><b>HOME</b></font></a></li>
+<li><a href="menu.html"><font face="arial" color="white" id="a1"><b>MENU</b></font></a></li>
+<li><a href="gallery.html"><font face="arial" color="white" id="a1"><b>GALLERY</b></font></a></li>
+<li><a href="about.html"><font face="arial" color="white" id="a1"><b>ABOUT</b></font></a></li>
+<li><a href="contact.html"><font face="arial" color="white" id="a1"><b>CONTACT</b></font></a></li>
+</ul>
+</nav>
+</header>
+
+<main>
+<br><br><br><br><br>
+<span id="h2"><b>&nbsp;$ Sign Up or Login</b></span>
+<br><br><br>
+
+<div class="container" >
+<p id="h3"><b>Login !! </b></p>
+<center>
+<form>
+<table>
+<tr>
+<td><label for="phone">Mobile number</label></td>
+<td><input type="text" id="phone" name="" placeholder="Enter your mobile number"  required pattern="[0-9]{10}"
+onblur="checkMob()" onchange="this.setCustomValidity('')">
+</td>
+</tr>
+<tr>
+<td><label for="pass">Password</label></td>
+<td><input type="password" id="pass" name="" placeholder="Enter your password" required ></td>
+</tr>
+<tr>
+<td colspan="2" align="center"><br><br>
+<input type="submit" name="" value="Login" onclick="validFunc()"><br><br>
+</td>
+</tr>
+</table>
+</form>
+</center>
+</div>
+<br><br>
+</main>
+
+<footer>
+<center>
+<p>
+<br>
+<a href="about.html">About Us</a> | <a href="contact.html">Contact</a><br>
+Copyright © The Secret Kitchen 2021 All Rights Reserved <br>
+</p>
+</center>
+</footer>
+
+<script type="text/javascript">
+function checkMob()
+{
+var input1=document.getElementById("phone");
+if(input1.validity.valid)
+{
+input1.setCustomValidity("");
+input1.reportValidity();
+}
+else
+{
+input1.setCustomValidity("Enter a valid mobile number");
+input1.reportValidity();
+}
+}
+function validFunc()
+{
+var mob=document.getElementById("phone");
+var pwd=document.getElementById("pass");
+if (mob.checkValidity() && pwd.checkValidity())
+{
+alert("Login successful!!\nHappy to see you again. Continue exploring our Secret Kitchen!!!");
+}
+else
+{
+alert("Check your input");
+}
+}
+</script>
+</body>
+</html>
