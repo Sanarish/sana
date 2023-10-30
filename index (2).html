@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+	body{
+    background-color: #E3E7E8;
+    font-family: system-ui;
+}
+.container{
+    width: 1000px;
+    margin: auto;
+    transition: 0.5s;
+}
+header{
+    display: grid;
+    grid-template-columns: 1fr 50px;
+    margin-top: 50px;
+}
+header .shopping{
+    position: relative;
+    text-align: right;
+}
+header .shopping img{
+    width: 40px;
+}
+header .shopping span{
+    background: red;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    position: absolute;
+    top: -5px;
+    left: 80%;
+    padding: 3px 10px;
+}
+.list{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
+    row-gap: 20px;
+    margin-top: 50px;
+}
+.list .item{
+    text-align: center;
+    background-color: #DCE0E1;
+    padding: 20px;
+    box-shadow: 0 50px 50px #757676;
+    letter-spacing: 1px;
+}
+.list .item img{
+    width: 90%;
+    height: 430px;
+    object-fit: cover;
+}
+.list .item .title{
+    font-weight: 600;
+}
+.list .item .price{
+    margin: 10px;
+}
+.list .item button{
+    background-color: #1C1F25;
+    color: #fff;
+    width: 100%;
+    padding: 10px;
+}
+.card{
+    position: fixed;
+    top:0;
+    left: 100%;
+    width: 500px;
+    background-color: #453E3B;
+    height: 100vh;
+    transition: 0.5s;
+}
+.active .card{
+    left: calc(100% - 500px);
+}
+.active .container{
+   transform: translateX(-200px);
+}
+.card h1{
+    color: #E8BC0E;
+    font-weight: 100;
+    margin: 0;
+    padding: 0 20px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+.card .checkOut{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+}
+.card .checkOut div{
+    background-color: #E8BC0E;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+.card .checkOut div:nth-child(2){
+    background-color: #1C1F25;
+    color: #fff;
+}
+.listCard li{
+    display: grid;
+    grid-template-columns: 100px repeat(3, 1fr);
+    color: #fff;
+    row-gap: 10px;
+}
+.listCard li div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.listCard li img{
+    width: 90%;
+}
+.listCard li button{
+    background-color: #fff5;
+    border: none;
+}
+.listCard .count{
+    margin: 0 10px;
+}
+	
+	</style>
+</head>
+<body class="">
+    
+    <div class="container">
+        <header>
+            <h1>Your Shopping Cart</h1>
+            <div class="shopping">
+                <img src="image/shopping.svg">
+                <span class="quantity">0</span>
+            </div>
+        </header>
+
+        <div class="list">
+          
+        </div>
+    </div>
+    <div class="card">
+        <h1>Card</h1>
+        <ul class="listCard">
+        </ul>
+        <div class="checkOut">
+            <div class="total">0</div>
+            <div class="closeShopping">
+			<a href="cart.html">payment</a>
+			</div>
+        </div>
+    </div>
+
+    <script >
+	let openShopping = document.querySelector('.shopping');
+let closeShopping = document.querySelector('.closeShopping');
+let list = document.querySelector('.list');
+let listCard = document.querySelector('.listCard');
+let body = document.querySelector('body');
+let total = document.querySelector('.total');
+let quantity = document.querySelector('.quantity');
+
+openShopping.addEventListener('click', ()=>{
+    body.classList.add('active');
+})
+closeShopping.addEventListener('click', ()=>{
+    body.classList.remove('active');
+})
+
+let products = [
+    {
+        id: 1,
+        name: 'Wall art prints',
+        image: src='https://i.etsystatic.com/11396539/r/il/c44097/4637460949/il_794xN.4637460949_4ly7.jpg',
+		price: 507
+    },
+    {
+        id: 2,
+        name: 'Stairway Chandelier',
+        image: src='https://i.etsystatic.com/5733329/r/il/407e5b/1586306096/il_794xN.1586306096_6e3m.jpg',
+        price: 12000
+    },
+    {
+        id: 3,
+        name: 'HUGE Flower Candle 28 oz',
+        image: src='https://i.etsystatic.com/35558980/r/il/2d5696/4775870522/il_794xN.4775870522_ntei.jpg',
+        price: 1999
+    },
+    {
+        id: 4,
+        name: 'Large Wall Clock',
+        image: src='https://i.etsystatic.com/21367412/r/il/20e11a/4572132576/il_794xN.4572132576_muk5.jpg',
+        price: 6700
+    },
+    {
+        id: 5,
+        name: 'Christmas Countdown Calender',
+        image: src='https://i.etsystatic.com/10237298/r/il/2eafc9/4304086584/il_794xN.4304086584_rz9q.jpg',
+		price: 1850
+    },
+    {
+        id: 6,
+        name: 'Rattan Standing Planter',
+        image: arc='https://mail.google.com/mail/u/0?ui=2&ik=d37e011724&attid=0.2&permmsgid=msg-a:r4745126134123291159&th=18b7f2744d7ff5f1&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ_v1N71K6_5Bsc2fLiV4Rlilb6vKPtI0lkaz_74TiGOfwBy4p5og_UlPhEk3L_anmiI8Ls3-MCWkFEfkMYCnxykyl67o8Ad-WdHL0xzlj7lTBtQtL83ZzE-5k0&disp=emb&realattid=18b7f27042b207cf5f03',
+        price: 9800
+    },
+	{
+        id: 7,
+        name: 'Christmas Countdown Calender',
+        image: src='https://mail.google.com/mail/u/0?ui=2&ik=d37e011724&attid=0.7&permmsgid=msg-f:1781157982385989637&th=18b7f1bf7cf7e805&view=att&disp=safe&realattid=f_loch32pc6',
+		price: 1850
+    },
+	{
+        id: 8,
+        name: 'Wooden Cloud Shelf',
+        image: src='https://mail.google.com/mail/u/0?ui=2&ik=d37e011724&attid=0.1&permmsgid=msg-f:1781157982385989637&th=18b7f1bf7cf7e805&view=att&disp=safe&realattid=f_loch1t9q0',
+		price: 2304
+    },
+	{
+        id: 9,
+        name: 'Hourglass Ribbed Candle Set',
+        image: src='https://mail.google.com/mail/u/0?ui=2&ik=d37e011724&attid=0.10&permmsgid=msg-f:1781157982385989637&th=18b7f1bf7cf7e805&view=att&disp=safe&realattid=f_loch3qfv9',
+		price: 3200
+    },
+	{
+        id: 10,
+        name: 'Daisy Heart Wall Art',
+        image: src='https://mail.google.com/mail/u/0?ui=2&ik=d37e011724&attid=0.11&permmsgid=msg-f:1781157982385989637&th=18b7f1bf7cf7e805&view=att&disp=safe&realattid=f_loch4dq210',
+		price: 980
+    },
+	{
+        id: 11,
+        name: 'Pia Lamp With Decor',
+        image: src='https://mail.google.com/mail/u/0?ui=2&ik=d37e011724&attid=0.8&permmsgid=msg-f:1781157982385989637&th=18b7f1bf7cf7e805&view=att&disp=safe&realattid=f_loch32pf7',
+		price: 3400
+    },
+	{
+        id: 12,
+        name: 'Butterfly Spiral Stair Ceiling light',
+        image: src='https://mail.google.com/mail/u/0?ui=2&ik=d37e011724&attid=0.9&permmsgid=msg-f:1781157982385989637&th=18b7f1bf7cf7e805&view=att&disp=safe&realattid=f_loch3qfn8',
+		price: 36050
+    },
+	{
+        id: 13,
+        name: 'Circular Hollow Ceramic Vase',
+        image: src='https://mail.google.com/mail/u/0?ui=2&ik=d37e011724&attid=0.3&permmsgid=msg-a:r4745126134123291159&th=18b7f2744d7ff5f1&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ9f4WoSxc7ri4lPVmlaWm1zfM8NM6A39af91Avzq3-EZORr7HwwaroW0-_WX37hu_BqkUJ7-dEJVxqabpL9OYKfrC7R_5Q-mCwiN9iaSJV2ppcUG1sXTaZ1TVw&disp=emb&realattid=18b7f271040207cf5f04',
+		price: 3300
+    },
+	{
+        id: 14,
+        name: 'Big Size Flower Rug',
+        image: src='https://mail.google.com/mail/u/0?ui=2&ik=d37e011724&attid=0.13&permmsgid=msg-f:1781157982385989637&th=18b7f1bf7cf7e805&view=att&disp=safe&realattid=f_loch4dqb12',
+		price: 1890
+    },
+	{
+        id: 15,
+        name: 'Bathroom rugs',
+        image: src='https://mail.google.com/mail/u/0?ui=2&ik=d37e011724&attid=0.12&permmsgid=msg-f:1781157982385989637&th=18b7f1bf7cf7e805&view=att&disp=safe&realattid=f_loch4dq711',
+		price: 900
+    },
+	    {
+        id: 16,
+        name: 'Shelving Units',
+        image: src='https://mail.google.com/mail/u/0?ui=2&ik=d37e011724&attid=0.1&permmsgid=msg-a:r4745126134123291159&th=18b7f2744d7ff5f1&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ_Hxk3b-iqaXQ68j7mhSwtCrSBYwMkgp00Iw_USk6bwfIeyX1BvzV8zhZ33cTE0SfU3kxrxxqT0IM4bOdL109xbEL_EzqucNJ7VDIWqC6YJO7fOdQ9p32IqofU&disp=emb&realattid=18b7f2733a8207cf5f05',
+		price: 2670
+    },
+	    {
+        id: 17,
+        name: 'Ottaman Nursery Pouf',
+        image: src='https://mail.google.com/mail/u/0?ui=2&ik=d37e011724&attid=0.5&permmsgid=msg-a:r4745126134123291159&th=18b7f2744d7ff5f1&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ8oeGgPFPKqx9i3oNANn1XuM2ekrt07ZF4amyCsl6zn8_sywhmChYVtPLCluPm7LDy4YngeKuoQHXPqv7DwlWXKs8pKVzSu_i9DZ9y8-sO0Q0QJ2ItuVt0OOgA&disp=emb&realattid=18b7f26dc66207cf5f01',
+		price: 4699
+    },
+	    {
+        id: 18,
+        name: 'Seagrass and Iron Plant Stands',
+        image: src='https://mail.google.com/mail/u/0?ui=2&ik=d37e011724&attid=0.1&permmsgid=msg-a:r6505016217076339930&th=18b7f2bc273d4a1c&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ9rt9N02K-qadMNL32FDbt8QACIaxtghurSFeHdgv4_HcpHv_M2zrR_2TY7i_VhKJ4k_E5GRErdiFMatgsvRClMBp665hl734zv56jnD_bubAM_5xB7fpwjRr4&disp=emb&realattid=18b7f2bb316207cf5f01',
+		price: 2334
+    },
+	{
+        id: 19,
+        name: 'Modern Macrame Hanging Shelf',
+        image: src='https://mail.google.com/mail/u/0?ui=2&ik=d37e011724&attid=0.3&permmsgid=msg-a:r-7024314367996975901&th=18b7f3fd4201c090&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ8-miAegw1AZthAPwoJgzLfztRJ66S_Hh9Nq0Vk8dj2s29y4Z9z6Y5Uu583FlwcdR_AqV1FZltelJ9r4ZfjkYlsgcs_IU9k8AfzwlKlL2ZKexBB6O70vBYi2q8&disp=emb&realattid=18b7f3fa7f0207cf5f02',
+		price: 5600
+    },
+	{
+        id: 20,
+        name: 'Tiny Round Shaped Wall mirror',
+        image: src='https://mail.google.com/mail/u/0?ui=2&ik=d37e011724&attid=0.1&permmsgid=msg-a:r-7024314367996975901&th=18b7f3fd4201c090&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ8oPp1-oR3cmMDZ8Vlg20rA4D02Z1R527LMlHYfpb-uJYPaRgoxsewKWofv2-rjTtDhLucupd2SytkDDcUrIpITiuKntVAHajTvTlFA3weIKo9nxLXrQqm4cx0&disp=emb&realattid=18b7f3fbfe4207cf5f03',
+		price: 3844
+    },
+	{
+        id: 21,
+        name: 'Wooden Key Holder',
+        image: src='https://mail.google.com/mail/u/0?ui=2&ik=d37e011724&attid=0.2&permmsgid=msg-a:r-7024314367996975901&th=18b7f3fd4201c090&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ8RJAtkVfoS03UJ553I9ueH_q_yyfDeNgZzsgHkDg8CheHN4cnyAmEuphYTDnyuTq0eNsP5tcZHw8ZfeUCnEXzon7VRASSv2MXKtaL5elHsT1ZEA6-XOY7FdSU&disp=emb&realattid=18b7f3f9be3207cf5f01',
+		price: 1200
+    },
+	
+	
+	
+	
+];
+let listCards  = [];
+function initApp(){
+    products.forEach((value, key) =>{
+        let newDiv = document.createElement('div');
+        newDiv.classList.add('item');
+        newDiv.innerHTML = `
+            <img src="${value.image}">
+            <div class="title">${value.name}</div>
+            <div class="price">${value.price.toLocaleString()}</div>
+            <button onclick="addToCard(${key})">Add To Card</button>`;
+        list.appendChild(newDiv);
+    })
+}
+initApp();
+function addToCard(key){
+    if(listCards[key] == null){
+        // copy product form list to list card
+        listCards[key] = JSON.parse(JSON.stringify(products[key]));
+        listCards[key].quantity = 1;
+    }
+    reloadCard();
+}
+function reloadCard(){
+    listCard.innerHTML = '';
+    let count = 0;
+    let totalPrice = 0;
+    listCards.forEach((value, key)=>{
+        totalPrice = totalPrice + value.price;
+        count = count + value.quantity;
+        if(value != null){
+            let newDiv = document.createElement('li');
+            newDiv.innerHTML = `
+                <div><img src="${value.image}"/></div>
+                <div>${value.name}</div>
+                <div>${value.price.toLocaleString()}</div>
+                <div>
+                    <button onclick="changeQuantity(${key}, ${value.quantity - 1})">-</button>
+                    <div class="count">${value.quantity}</div>
+                    <button onclick="changeQuantity(${key}, ${value.quantity + 1})">+</button>
+                </div>`;
+                listCard.appendChild(newDiv);
+        }
+    })
+    total.innerText = totalPrice.toLocaleString();
+    quantity.innerText = count;
+}
+function changeQuantity(key, quantity){
+    if(quantity == 0){
+        delete listCards[key];
+    }else{
+        listCards[key].quantity = quantity;
+        listCards[key].price = quantity * products[key].price;
+    }
+    reloadCard();
+}</script>
+</body>
+</html>
